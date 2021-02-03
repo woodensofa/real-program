@@ -1,0 +1,41 @@
+[Github Font Modifier](https://docs.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax)
+#We need to declare variable types in C++.How does this type declaration change the structure of the code comparing to other languages without type declaration like Python? 
+#Find the missing letters from a string if it doesn't create a pangram.
+#include<iostream>
+#include<map>
+#include<algorithm>
+#include<string>
+using namespace std;
+
+int main(){
+	string s;
+	getline(cin, s);
+	s.erase(remove(s.begin(), s.end(), ' '), s.end());
+
+	for(int i = 0; i < s.length(); i++){
+		s[i] = tolower(s[i]);
+	}
+	map<char, int> mp;
+	for(char ch = 'a'; ch <= 'z'; ch++){
+		mp[ch]++;
+	}
+	for(char c: s){
+		if(mp.find(c) != mp.end()){
+			mp[c]--;
+			if(mp[c] == 0){
+				mp.erase(c);
+			}
+		}
+	}
+
+	if(mp.size() == 0){
+		cout<<"Panagram"<<endl;
+	}
+	else{
+		for(auto itr = mp.begin(); itr != mp.end(); itr++){
+			cout<<itr->first<<endl;
+		}
+	}
+	return 0;
+}
+
